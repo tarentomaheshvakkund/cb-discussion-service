@@ -164,7 +164,7 @@ public class ProfanityConsumer {
                     handleProfanityForAnswerPostReplyCreation(parentDiscussionId, parentAnswerPostId, discussionAnswerPostReply, data);
                     Optional<DiscussionEntity> discussionEntity = discussionRepository.findById(parentAnswerPostId);
                     discussionEntity.ifPresent(discussionDbData -> {
-                        discussionDbData.setIsProfane(true);
+                        discussionDbData.setIsProfane(false);
                         answerPostReplyService.updateAnswerPostReplyToAnswerPost(discussionDbData, discussionId, DECREMENT);
                     });
                 }
@@ -248,7 +248,7 @@ public class ProfanityConsumer {
                             Constants.ANSWER_POST)));
             Optional<DiscussionEntity> discussionEntity = discussionRepository.findById(parentDiscussionId);
             discussionEntity.ifPresent(discussionDbUpdateData -> {
-                discussionDbUpdateData.setIsProfane(true);
+                discussionDbUpdateData.setIsProfane(false);
                 discussionService.updateAnswerPostToDiscussion(discussionDbUpdateData, data.get(Constants.DISCUSSION_ID).asText(), DECREMENT);
             });
         }
